@@ -25,7 +25,7 @@ public class CompanyResource extends ServerResource {
 
     @Override
     protected void doInit() throws ResourceException {
-        companyId = ResourceUtils.getRequiredPathVariableAsInteger(this, "companyId");
+        companyId = ResourceUtils.getPathVariableAsInteger(this, "companyId");
     }
 
 

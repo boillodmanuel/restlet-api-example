@@ -2,7 +2,6 @@ package org.restlet.example.contact.api.core.util;
 
 import org.restlet.example.contact.api.core.exception.BadEntityException;
 import org.restlet.example.contact.api.core.exception.BadParameterException;
-import org.restlet.example.contact.api.core.exception.PathVariableRequiredException;
 import org.restlet.resource.ServerResource;
 
 /**
@@ -10,19 +9,15 @@ import org.restlet.resource.ServerResource;
  */
 public class ResourceUtils {
 
-    public static String getRequiredPathVariable(ServerResource serverResource, String pathVariableName) {
-        String pathVariableValue = serverResource.getQueryValue(pathVariableName);
+    public static Integer getPathVariableAsInteger(ServerResource serverResource, String pathVariableName) {
+        String pathVariableValue = serverResource.getAttribute(pathVariableName);
         if (pathVariableValue == null) {
-            throw new PathVariableRequiredException(pathVariableName);
+            throw new RuntimeException("Path variable '" + pathVariableValue + "' is null.");
         }
-        return null;
-    }
-    public static Integer getRequiredPathVariableAsInteger(ServerResource serverResource, String pathVariableName) {
-        String pathVariableValue = getRequiredPathVariable(serverResource, pathVariableName);
         try {
             return Integer.parseInt(pathVariableValue);
         } catch (NumberFormatException e) {
-            throw new BadParameterException("Path variable '" + pathVariableValue + "' shoud be an integer.");
+            throw new BadParameterException("Path variable '" + pathVariableValue + "' should be an integer.");
         }
     }
 

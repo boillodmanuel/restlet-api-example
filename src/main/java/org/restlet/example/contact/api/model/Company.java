@@ -1,5 +1,8 @@
 package org.restlet.example.contact.api.model;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.google.common.base.Strings;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 import org.restlet.example.contact.api.core.validation.ValidationErrors;
@@ -9,7 +12,7 @@ import java.util.List;
 /**
  * @author Manuel Boillod
  */
-
+@JsonRootName("Company")
 public class Company {
 
     private Integer id;
@@ -41,6 +44,8 @@ public class Company {
         return tags;
     }
 
+    @JacksonXmlElementWrapper(localName = "tags")
+    @JacksonXmlProperty(localName = "tag")
     public void setTags(List<String> tags) {
         this.tags = tags;
     }

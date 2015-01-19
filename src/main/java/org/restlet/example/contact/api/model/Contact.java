@@ -5,6 +5,8 @@ import com.google.common.base.Strings;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 import org.restlet.example.contact.api.core.validation.ValidationErrors;
 
+import java.util.Date;
+
 public class Contact {
 
     private Integer id;
@@ -13,7 +15,9 @@ public class Contact {
 
     private String lastName;
 
-    private Company company;
+    private Date birthday;
+
+    private Integer companyId;
 
     @ApiModelProperty("the contact id")
     public Integer getId() {
@@ -24,7 +28,7 @@ public class Contact {
         this.id = id;
     }
 
-    @ApiModelProperty("the contact firstName")
+    @ApiModelProperty("the contact first name")
     @JsonProperty("first_name")
     public String getFirstName() {
         return firstName;
@@ -34,7 +38,7 @@ public class Contact {
         this.firstName = firstName;
     }
 
-    @ApiModelProperty("the contact lastName")
+    @ApiModelProperty("the contact last name")
     @JsonProperty("last_name")
     public String getLastName() {
         return lastName;
@@ -44,13 +48,23 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    @ApiModelProperty("the contact company")
-    public Company getCompany() {
-        return company;
+    @ApiModelProperty("the contact birthday")
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    @ApiModelProperty("the contact company")
+    @JsonProperty("company_id")
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
     public void validate() {
@@ -59,10 +73,10 @@ public class Contact {
             validationErrors.addFieldError("id", "This field is required");
         }
         if (Strings.isNullOrEmpty(firstName)) {
-            validationErrors.addFieldError("firstName", "This field is required");
+            validationErrors.addFieldError("first_name", "This field is required");
         }
         if (Strings.isNullOrEmpty(lastName)) {
-            validationErrors.addFieldError("lastName", "This field is required");
+            validationErrors.addFieldError("last_name", "This field is required");
         }
         validationErrors.checkErrors("Contact entity is not valid");
     }

@@ -33,6 +33,11 @@
             <artifactId>org.restlet.ext.apispark</artifactId>
             <version>${restlet-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.jetty</artifactId>
+            <version>${restlet-version}</version>
+        </dependency>
 
         <!-- tests -->
 

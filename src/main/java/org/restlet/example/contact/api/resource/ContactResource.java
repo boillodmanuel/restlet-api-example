@@ -25,7 +25,7 @@ public class ContactResource extends ServerResource {
 
     @Override
     protected void doInit() throws ResourceException {
-        contactId = ResourceUtils.getRequiredPathVariableAsInteger(this, "contactId");
+        contactId = ResourceUtils.getPathVariableAsInteger(this, "contactId");
     }
 
     @ApiOperation(value = "get a contact", tags = "contact")
