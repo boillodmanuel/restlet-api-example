@@ -5,7 +5,7 @@ import org.restlet.resource.ServerResource;
 
 import java.io.File;
 
-public class AppReadmeResource extends ServerResource {
+public class RootResource extends ServerResource {
 
     private static File README;
 
@@ -19,7 +19,7 @@ public class AppReadmeResource extends ServerResource {
         }
     }
 
-    public AppReadmeResource() {
+    public RootResource() {
         setName("Readme");
         setDescription("Readme resource");
     }

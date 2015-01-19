@@ -3,6 +3,8 @@ package org.restlet.example.contact.api.resource;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import org.restlet.data.Status;
+import org.restlet.example.contact.api.ContactsApplication;
 import org.restlet.example.contact.api.core.exception.BadEntityException;
 import org.restlet.example.contact.api.core.exception.NotFoundException;
 import org.restlet.example.contact.api.core.util.ResourceUtils;
@@ -36,6 +38,7 @@ public class CompanyResource extends ServerResource {
     })
     @Get
     public Company getCompany() throws NotFoundException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER);
         Company company = CompanyDb.INSTANCE.getCompany(companyId);
         if (company == null) {
             throw new NotFoundException("No company with id '" + companyId + "'");
@@ -51,6 +54,7 @@ public class CompanyResource extends ServerResource {
     })
     @Put
     public Company updateCompany(Company company) throws NotFoundException, BadEntityException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER);
         ResourceUtils.notNull(company);
         company.validate();
         return CompanyDb.INSTANCE.updateCompany(companyId, company);
@@ -63,6 +67,7 @@ public class CompanyResource extends ServerResource {
     })
     @Delete
     public void deleteCompany() throws NotFoundException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER, ContactsApplication.ROLE_ADMIN);
         boolean removed = CompanyDb.INSTANCE.deleteCompany(companyId);
         if (!removed) {
             throw new NotFoundException("No company with id '" + companyId + "'");

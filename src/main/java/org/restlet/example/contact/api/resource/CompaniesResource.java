@@ -3,6 +3,7 @@ package org.restlet.example.contact.api.resource;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import org.restlet.example.contact.api.ContactsApplication;
 import org.restlet.example.contact.api.core.exception.BadEntityException;
 import org.restlet.example.contact.api.core.util.ResourceUtils;
 import org.restlet.example.contact.api.db.CompanyDb;
@@ -25,6 +26,7 @@ public class CompaniesResource extends ServerResource {
     })
     @Get
     public CompanyList getCompanies() {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER);
         return new CompanyList(CompanyDb.INSTANCE.getCompanies());
     }
 
@@ -35,6 +37,7 @@ public class CompaniesResource extends ServerResource {
     })
     @Post
     public Company addCompany(Company company) throws BadEntityException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER);
         ResourceUtils.notNull(company);
         company.validate();
         return CompanyDb.INSTANCE.addCompany(company);

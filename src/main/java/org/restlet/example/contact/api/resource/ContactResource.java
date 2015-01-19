@@ -3,6 +3,7 @@ package org.restlet.example.contact.api.resource;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import org.restlet.example.contact.api.ContactsApplication;
 import org.restlet.example.contact.api.core.exception.BadEntityException;
 import org.restlet.example.contact.api.core.exception.NotFoundException;
 import org.restlet.example.contact.api.core.util.ResourceUtils;
@@ -35,6 +36,7 @@ public class ContactResource extends ServerResource {
     })
     @Get
     public Contact getContact() throws NotFoundException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER);
         Contact contact = ContactDb.INSTANCE.getContact(contactId);
         if (contact == null) {
             throw new NotFoundException("No contact with id '" + contactId + "'");
@@ -50,6 +52,7 @@ public class ContactResource extends ServerResource {
     })
     @Put
     public Contact updateContact(Contact contact) throws NotFoundException, BadEntityException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER);
         ResourceUtils.notNull(contact);
         contact.validate();
         return ContactDb.INSTANCE.updateContact(contactId, contact);
@@ -62,6 +65,7 @@ public class ContactResource extends ServerResource {
     })
     @Delete
     public void deleteContact() throws NotFoundException {
+        ResourceUtils.checkRole(this, ContactsApplication.ROLE_USER, ContactsApplication.ROLE_ADMIN);
         boolean removed = ContactDb.INSTANCE.deleteContact(contactId);
         if (!removed) {
             throw new NotFoundException("No contact with id '" + contactId + "'");

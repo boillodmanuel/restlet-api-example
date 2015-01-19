@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class Db {
 
-    public static void populate() throws ParseException {
+    public static void populate() throws Exception {
         Company company = new Company();
         company.setName("Restlet");
         company.setTags(Arrays.asList("API", "open source"));
