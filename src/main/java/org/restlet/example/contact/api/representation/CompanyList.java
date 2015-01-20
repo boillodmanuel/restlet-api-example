@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TODO because XML https://github.com/FasterXML/jackson-dataformat-xml#known-limitations
+ *
  * @author Manuel Boillod
  */
 @JacksonXmlRootElement(localName = "companies")

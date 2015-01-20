@@ -5,6 +5,7 @@ import org.restlet.example.contact.api.core.exception.NotFoundException;
 import org.restlet.example.contact.api.model.Company;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class CompanyDb {
 
     private AtomicInteger idGenerator = new AtomicInteger();
 
-    private Map<Integer, Company> companies = new LinkedHashMap<>();
+    private Map<Integer, Company> companies = Collections.synchronizedMap(new LinkedHashMap<Integer, Company>());
 
     public List<Company> getCompanies() {
         return new ArrayList<>(companies.values());

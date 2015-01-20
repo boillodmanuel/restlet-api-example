@@ -1,11 +1,19 @@
+Sample web API README
+=====================
+
+Resources:
+-----------------
+
 Public resources:
 
-- GET  /
+- GET / (this documentation)
+- GET /api-docs (swagger 1.2)
+- GET /swagger.json (swagger 2.0)
 
 Resources restricted to authenticated user with USER (user/password):
 
 - GET  /companies
-- POST /companies
+- POST /companies EXAMPLE JSON
 
 - GET  /companies/{companyId}
 - PUT  /companies/{companyId}
@@ -20,6 +28,7 @@ Resources restricted to authenticated user with role ADMIN (admin/password):
 
 - DELETE /companies/{companyId}
 - DELETE /contacts/{contactId}
+
 
 Example:
 

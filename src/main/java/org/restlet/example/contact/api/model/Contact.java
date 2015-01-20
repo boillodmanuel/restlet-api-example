@@ -1,5 +1,6 @@
 package org.restlet.example.contact.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Strings;
 import com.wordnik.swagger.annotations.ApiModelProperty;
@@ -29,7 +30,7 @@ public class Contact {
     }
 
     @ApiModelProperty("the contact first name")
-    @JsonProperty("first_name")
+    @JsonProperty(value = "first_name", required = true)
     public String getFirstName() {
         return firstName;
     }
@@ -39,7 +40,7 @@ public class Contact {
     }
 
     @ApiModelProperty("the contact last name")
-    @JsonProperty("last_name")
+    @JsonProperty(value = "last_name", required = true)
     public String getLastName() {
         return lastName;
     }
@@ -48,7 +49,8 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    @ApiModelProperty("the contact birthday")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @ApiModelProperty("the contact birthday. Date pattern is 'yyyy-MM-dd'")
     public Date getBirthday() {
         return birthday;
     }

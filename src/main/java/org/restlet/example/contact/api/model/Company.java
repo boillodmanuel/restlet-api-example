@@ -1,5 +1,6 @@
 package org.restlet.example.contact.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -31,6 +32,7 @@ public class Company {
     }
 
     @ApiModelProperty("the company name")
+    @JsonProperty(required = true)
     public String getName() {
         return name;
     }
